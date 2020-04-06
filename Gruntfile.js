@@ -26,19 +26,19 @@ module.exports = function (grunt) {
 		},
 		concat: {
 			js: {
-				src: ['js/*.js', './arr/**/*.js'],
-				dest: 'dist/bundle.js'
+				src: ['js/*.js'],
+				dest: 'dist/index.js'
 			},
 			css: {
-				src: ['css/*.css', './arr/**/*.css'],
-				dest: 'dist/bundle.css'
+				src: ['css/*.css'],
+				dest: 'dist/index.css'
 			}
 		},
 		uglify: {
-			'dist/bundle.min.js': 'dist/bundle.js'
+			'dist/note.min.js': 'dist/index.js'
 		},
 		cssmin: {
-			'dist/bundle.min.css': 'dist/bundle.css'
+			'dist/note.min.css': 'dist/index.css'
 		},
 		useminPrepare: {
 			html: 'index.html',
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 			html: ['dist/index.html']
 		},
 		clean: {
-			end: ['dist/bundle.css', 'dist/bundle.js', '.tmp']
+			end: ['dist/index.css', 'dist/index.js', '.tmp']
 		}
 	});
 	

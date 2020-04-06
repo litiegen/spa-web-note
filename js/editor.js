@@ -1,19 +1,17 @@
+//更改文本字体
 var $editor = (function() {
-	var $DOM = $(
+	var $text = $(
 		'<div class="notepad-editor">'
 			+ '<textarea spellcheck="false" auto-size="none"></textarea>'
 		+ '</div>');
-	
-	var $textArea = $DOM.find('textarea');
-	var cfg = {
-		posHandler: null,
-		contentHandler: null,
-		wrap: false
-	};
-	
-	function setFont(e) {
-		$textArea.css({'font-family': e.family, 'font-size': e.size + 'pt'});
-		if(e.style === '斜体') {
+
+	var $textArea = $text.find('textarea');
+	function setFont(e){
+		$textArea.css({
+			'font-family': e.family,
+			'font-size': e.size + 'pt'
+		});
+		if(e.style === '斜体'){
 			$textArea.css({
 				'font-style': 'italic',
 				'font-weight':''
@@ -22,31 +20,29 @@ var $editor = (function() {
 		}
 		else if(e.style === '粗体') {
 			$textArea.css({
-				'font-weight': 'bold',
 				'font-style': '',
+				'font-weight': 'bold'
 			});
 			return;
 		}
 		else if(e.style === '粗偏斜体') {
 			$textArea.css({
-				'font-weight': 'bold', 
-				'font-style': 'italic'});
+				'font-style': 'italic',
+				'font-weight': 'bold'
+			});
 			return;
 		}
 		else{
 			$textArea.css({
-				'font-weight': '', 
-				'font-style': ''});
+				'font-style': '',
+				'font-weight': ''
+			});
 			return;
 		}
 	}
-	
-	function show(conf) {
-		$.extend(cfg, conf);
-		$('body').append($DOM);
-		$textArea.trigger('focus');
+	function show() {
+		$('body').append($text);
 	}
-	
 	return {
 		show: show,
 		setFont: setFont

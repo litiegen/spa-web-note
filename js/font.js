@@ -1,5 +1,5 @@
-var $dlgFont = (function() {
-	var $dlg = $(
+var $Font = (function() {
+	var $fonts = $(
 		'<div class="notepad-dlg-mask notepad-dlg-font">'
 			+ '<div class="dialogbox notepad-dlgbox">'
 				+ '<div class="notepad-dlg-titlebar">'
@@ -27,14 +27,11 @@ var $dlgFont = (function() {
 					+ '<input class="btn-cancel btn" type="button" value="取消">'
 				+ '</div>'
 			+ '</div>'
-		+ '</div>');
-	
-	var $btnOk = $dlg.find('.btn-ok'),
-		$btnClose = $dlg.find('.close-btn'),
-		$btnCancel = $dlg.find('.btn-cancel'),
-		$sample = $dlg.find('.sample-txt'),
-		$titleBar = $dlg.find('.notepad-dlg-titlebar');
-
+		+ '</div>');	
+	var $btnOk = $fonts.find('.btn-ok'),
+		$btnClose = $fonts.find('.close-btn'),
+		$btnCancel = $fonts.find('.btn-cancel'),
+		$sample = $fonts.find('.sample-txt');
 	var fonts = [
 		'Agency FB', 
 		'Algerian', 
@@ -55,10 +52,8 @@ var $dlgFont = (function() {
 	var cfg = {
 		family: 'Arial',
 		style: '常规',
-		size: '16',
-		okHandler: null
+		size: '16'
 	};
-	
 	function sample() {
 		$sample.css({
 			'font-family': cfg.family, 
@@ -93,12 +88,10 @@ var $dlgFont = (function() {
 			return;
 		}
 	}
-	
 	function init() {
-		var lstFamily = new comList();
-		lstFamily.show({
+		new List().show({
 			container: '.notepad-dlg-font .font-family',
-			width: '176px',
+			width: '170px',
 			list: fonts,
 			select: fonts.indexOf(cfg.family),
 			isFont: true,
@@ -107,11 +100,9 @@ var $dlgFont = (function() {
 				sample();
 			}
 		});
-	
-		var lstStyle = new comList();
-		lstStyle.show({
+		new List().show({
 			container: '.notepad-dlg-font .font-style',
-			width: '132px',
+			width: '120px',
 			list: styles,
 			select: styles.indexOf(cfg.style),
 			isFontStyle: true,
@@ -120,11 +111,9 @@ var $dlgFont = (function() {
 				sample();
 			}
 		});
-	
-		var lstSize = new comList();
-		lstSize.show({
+		new List().show({
 			container: '.notepad-dlg-font .font-size',
-			width: '64px',
+			width: '60px',
 			list: sizes,
 			select: sizes.indexOf(cfg.size),
 			selectHandler: function(e) {
@@ -134,17 +123,13 @@ var $dlgFont = (function() {
 		});
 		sample();
 	}
-	
 	function destory() { 
-		$dlg.remove(); 
+		$fonts.remove(); 
 	}
-	
 	function show(conf) {
 		$.extend(cfg, conf);
-		$('body').append($dlg);
+		$('body').append($fonts);
 		init();
-		$dlg.find('.dialogbox').draggable({handle: $titleBar});
-	
 		$btnClose.click(destory);
 		$btnCancel.click(destory);
 		$btnOk.click(function() {
@@ -155,10 +140,11 @@ var $dlgFont = (function() {
 			});
 			destory();
 		});
-	
-		$dlg.click(function(e) {
+		$fonts.click(function(e) {
 			e.stopPropagation();
 		});
 	}
-	return {show: show};
+	return {
+		show: show
+	};
 }());

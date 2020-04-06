@@ -1,68 +1,54 @@
-function comList() {
-	var $comList = $(
+//字体菜单列表
+function List() {
+	var $List = $(
 		'<div class="notepad-com-list">'
 			+ '<input class="editor" type="text"><br>'
 			+ '<ul class="list">'
 			+ '</ul>'
 		+ '</div>');
-	
-	var $editor = $comList.find('.editor'),
-		$list = $comList.find('.list'),
+	var $editor = $List.find('.editor'),
+		$lists = $List.find('.list'),
 		$items;
-	
-	var cfg = {
-		container: '',
-		list: [],
-		select: 0,
-		width: '200px',
-		isFont: false,
-		isFontStyle: false,
-		selectHandler: null
-	};
-	
+	var cfg={};
 	function fillData() {
 		var i = 0, $item;
+		console.log(cfg)
 		if(cfg.isFont) {
 			for(i=0; i<cfg.list.length; i++) {
 				$item = $('<li class="item"></li>');
 				$item.css({'font-family': cfg.list[i]});
-				$list.append($item.html(cfg.list[i]));
+				$lists.append($item.html(cfg.list[i]));
 			}
 		} 
 		else if(cfg.isFontStyle) {
 			for(i=0; i<cfg.list.length; i++) {
 				$item = $('<li class="item"></li>');
-				$list.append($item.html(cfg.list[i]));
+				$lists.append($item.html(cfg.list[i]));
 			}
 		} 
 		else {
 			for(i=0; i<cfg.list.length; i++) {
 				$item = $('<li class="item"></li>');
-				$list.append($item.html(cfg.list[i]));
+				$lists.append($item.html(cfg.list[i]));
 			}
 		}
-		$items = $list.find('.item');
+		$items = $lists.find('.item');
 	}
-	
-	function setSelect(n) {
-		$($items[n]).addClass('selected');
-		$editor.val(cfg.list[n]);
+	function init() {
+		if($(cfg.container).find('.notepad-com-list').length !== 0){
+			$(cfg.container).find('.notepad-com-list').remove();
+		}
+		$(cfg.container).append($List);
+		$List.css({ width: cfg.width });
+		fillData();
+		$($items[cfg.select]).addClass('selected');
+		$editor.val(cfg.list[cfg.select]);
 		$editor.select();
 	}
-	
-	function init() {
-		var $oldList = $(cfg.container).find('.notepad-com-list');
-		if($oldList.length !== 0) $oldList.remove();
-		$(cfg.container).append($comList);
-		$comList.css({ width: cfg.width });
-		fillData();
-		setSelect(cfg.select);
-	}
-	
 	this.show = function(conf) {
 		$.extend(cfg, conf);
 		init();
-		$list.click(function(e) {
+		$lists.click(function(e) {
 			$($items[cfg.select]).removeClass('selected');
 			cfg.select = cfg.list.indexOf($(e.target).html());
 			$($items[cfg.select]).addClass('selected');

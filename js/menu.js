@@ -1,173 +1,83 @@
-np.menuData = [{
+//菜单内容
+var menu = {};
+menu.fontHandler = function(e) {
+	menu.fontFamily = e.family;
+	menu.fontStype = e.style;
+	menu.fontSize = e.size;
+	$editor.setFont(e);
+};
+$(function() {
+	$editor.show();
+	$editor.setFont({
+		family: 'Arial',
+		style: '常规',
+		size: '16'
+	});
+	$menubar.show(menu.json);
+	$('body').click(function(){
+		$menubar.hideMenu();
+	});
+});
+menu.json = [{
 	title: '文件(F)',
 	menuItems: [{
 		title: '新建(N)',
-		shortcut: 'Ctrl+N',
-		enabled: true
-	},
-	{
-		title: '打开(O)...',
-		shortcut: 'Ctrl+O',
-        enabled: true
-	},
-	{
-		title: '保存(S)',
-        shortcut: 'Ctrl+S',
-        enabled: true
-	},
-	{
-		title: '另存为(A)...',
-        shortcut: '',
-        enabled: true
-	},
-	{
-		title: 'hr',
-        shortcut: '',
-        enabled: true,
-		handler: null
-	},
-	{
-		title: '页面设置(U)...',
-        shortcut: '',
-        enabled: true
-	},
-	{
-		title: '打印(P)...',
-        shortcut: 'Ctrl+P',
-        enabled: true
-	},
-	{
-		title: 'hr',
-        shortcut: '',
-        enabled: true,
-		handler: null
+		txt: 'Ctrl+N',
+		handler: function() {console.log('文件(F) check')}
 	},
 	{
 		title: '退出(X)',
-        shortcut: '',
-        enabled: true
+		handler: function() {console.log('退出(X) check')}
 	}],
-	width: '202px',
+	width: '200px',
 	left: '0px'
 },
 {
 	title: '编辑(E)',
 	menuItems: [{
 		title: '撤销(U)',
-        shortcut: 'Ctrl+Z',
-        enabled: false
-	},
-	{
-        title: 'hr',
-        shortcut: '',
-        enabled: true,
-		handler: null
+        txt: 'Ctrl+Z',
+		handler: function() {console.log('撤销(U) check')}
 	},
 	{
 		title: '剪切(T)',
-        shortcut: 'Ctrl+X',
-        enabled: true
-	},
-	{
-		title: '复制(C)',
-        shortcut: 'Ctrl+C',
-        enabled: false
-	},
-	{
-        title: '粘贴(P)',
-        shortcut: 'Ctrl+V',
-		enabled: false
-	},
-	{
-        title: '删除(L)',
-        shortcut: 'Del',
-        enabled: false
-	},
-	{
-		title: 'hr',
-        shortcut: '',
-        enabled: true,
-		handler: null
-	},
-	{
-        title: '查找(F)...',
-        shortcut: 'Ctrl+F',
-        enabled: false
-	},
-	{
-		title: '查找下一个(N)',
-        shortcut: 'F3',
-        enabled: false
-	},
-	{
-        title: '替换(R)...',
-        shortcut: 'Ctrl+H',
-        enabled: true
-	},
-	{
-		title: '转到(G)...',
-        shortcut: 'Ctrl+G',
-        enabled: true
-	},
-	{
-		title: 'hr',
-		shortcut: '',
-        enabled: true,
-		handler: null
-	},
-	{
-		title: '全选(A)',
-        shortcut: 'Ctrl+A',
-		enabled: true
+        txt: 'Ctrl+X',
+		handler: function() {console.log('剪切(T) check')}
 	}],
-	width: '218px',
-	left: '52px'
+	width: '200px',
+	left: '54px'
 },
 { 
 	title: '格式(O)',
 	menuItems: [{
-		title: '自动换行(W)',
-        shortcut: '',
-        enabled: true
-	},
-	{
 		title: '字体(F)...',
-        shortcut: '',
-        enabled: true,
         handler: function() {
-			$dlgFont.show({
-				family: np.fontFamily,
-				style: np.fontStyle,
-				size: np.fontSize,
-				okHandler: np.fontHandler
+			$Font.show({
+				family: menu.fontFamily,
+				style: menu.fontStyle,
+				size: menu.fontSize,
+				okHandler: menu.fontHandler
 			});
 		}
 	}],
-	width: '156px',
-	left: '106px'
+	width: '120px',
+	left: '108px'
 },
 {
 	title: '查看(V)',
 	menuItems: [{
-		title: '状态栏(S)',
-        shortcut: '',
-        enabled: true
+		title: '状态栏',
+		handler: function() {console.log('状态栏 check')}
 	}],
-	width: '138px',
+	width: '120px',
 	left: '162px'
 },
 {
 	title: '帮助(H)',
 	menuItems: [{
-		title: '查看帮助(H)',
-        shortcut: '',
-		enabled: true
-	},
-	{
-		title: '关于记事本(A)',
-        shortcut: '',
-		enabled: true
+		title: '关于记事本',
+		handler: function() {console.log('关于记事本 check')}
 	}],
-	width: '166px',
+	width: '140px',
 	left: '216px'
 }];
