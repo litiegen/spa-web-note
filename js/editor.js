@@ -1,4 +1,4 @@
-//更改文本字体
+//编辑
 var $editor = (function() {
 	var $text = $(
 		'<div class="notepad-editor">'

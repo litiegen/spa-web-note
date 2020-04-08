@@ -1,4 +1,4 @@
-//字体菜单列表
+//字体列表
 function List() {
 	var $List = $(
 		'<div class="notepad-com-list">'

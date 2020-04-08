@@ -1,6 +1,24 @@
 /* global module: true */
 module.exports = function (grunt) {
 	grunt.initConfig({
+		htmlhint: {
+			options: {
+			  htmlhintrc: '.htmlhintrc'
+			},
+			src: '*.html'
+		},
+		csslint: {
+			options: {
+				csslintrc: '.csslintrc'
+			},
+			src: '*.css'
+		},
+		eslint: {
+			options: {
+				configFile: '.eslintrc.json'
+			},
+			target: './js/*.js'
+		},
 		htmlmin: {
 			options: {
 				collapseWhitespace: true,
@@ -35,10 +53,10 @@ module.exports = function (grunt) {
 			}
 		},
 		uglify: {
-			'dist/note.min.js': 'dist/index.js'
+			'dist/bundle.min.js': 'dist/index.js'
 		},
 		cssmin: {
-			'dist/note.min.css': 'dist/index.css'
+			'dist/bundle.min.css': 'dist/index.css'
 		},
 		useminPrepare: {
 			html: 'index.html',
@@ -53,6 +71,9 @@ module.exports = function (grunt) {
 			end: ['dist/index.css', 'dist/index.js', '.tmp']
 		}
 	});
+	grunt.loadNpmTasks('grunt-htmlhint');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-eslint');
 	
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -62,6 +83,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-contrib-htmlmin');
 	grunt.loadNpmTasks('grunt-usemin');
-	
+
+	grunt.registerTask('lint', ['htmlhint', 'csslint', 'eslint']);
 	grunt.registerTask('default', ['copy:html', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin', 'htmlmin', 'imagemin', 'clean:end']);
 };

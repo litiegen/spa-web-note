@@ -1,3 +1,4 @@
+//字体
 var $Font = (function() {
 	var $fonts = $(
 		'<div class="notepad-dlg-mask notepad-dlg-font">'
